@@ -2,16 +2,20 @@ import React, {useState} from 'react';
 import { isEmpty, equals, isEmail } from 'validator';
 import { Link } from 'react-router-dom';
 import {showErrMsg, showSccsMsg} from '../components/helpers/message'
+import { showLoading } from './helpers/loading';
+import { signUp } from '../api/auth';
 import './css/SignUp.css';
+
+
 
 const SignUp = () => {
 
 	const [formData, setFormData] = useState({
 
-			username: '',
-			email: '',
-			password: '',
-			password2: '',
+			username: 'arditbtc',
+			email: 'arditbtc@gmail.com',
+			password: 'abc',
+			password2: 'abc',
 			successMsg: false,
 			errorMsg: false,
 			loading: false
@@ -40,14 +44,16 @@ const SignUp = () => {
 			errorMsg: ''
 		});
 
-		// client-side validation
+		
 
 
 
 	}
 
-	const handleSubmit = evt => {
+	const handleSubmit = (evt) => {
 		evt.preventDefault();
+
+		// client-side validation
 
 		if(isEmpty(username)
 		 || isEmpty(email) 
@@ -74,11 +80,36 @@ const SignUp = () => {
 			});
 		} else 
 		{
-			// success msg
+
+			const {username, email, password} = formData;
+			const data = {username, email, password};
+
 			setFormData({
 				...formData,
-				successMsg: 'Success!',
+				loading: true
+			})
+
+
+			signUp(data).then((response) => {
+				console.log('Axios SignUp success', response);
+				setFormData({
+					username:'',
+					email:'',
+					password:'',
+					password2:'',
+					loading:false,
+					successMsg:response.data.successMessage
+
+				})
+			}).catch((err) => {
+				console.log('Axios SignUp error', err);
+				setFormData({
+					...formData,
+					loading: false,
+					errorMsg: err.response.data.errorMessage,
+				});
 			});
+
 		}
 	}
 
@@ -182,8 +213,11 @@ const SignUp = () => {
                 <div className='col-md-4 mx-auto align-self-center'> 
 							{errorMsg && showErrMsg(errorMsg)}
 							{successMsg && showSccsMsg(successMsg)}
+							{loading && showLoading()}
                             {showSignUpForm()} 
-							{JSON.stringify(formData)}
+
+							
+							
                   </div>
             </div>
        </div>

@@ -1,15 +1,19 @@
 const mysql = require('mysql');
 
 
+
+
+
 const conn = mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:'mysqlpassword'
+    password:'mysqlpassword',
+    database: 'restaurantdb'
 });
 
 
-/*
-connectDB.connect(function(err){
+
+conn.connect(function(err){
     if(err)
     throw err;
 
@@ -17,20 +21,13 @@ connectDB.connect(function(err){
 });
 
 
-module.exports = connectDB;
-*/
-
-const connectDB = async () => {
-
-    try {
-        await conn.connect();
-        console.log("Database connection successful!");
-    } catch(err) {
-        console.log(err);
-    }
+module.exports = conn;
 
 
-};
 
 
-module.exports = connectDB;
+
+
+
+
+

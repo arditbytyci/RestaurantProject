@@ -1,9 +1,23 @@
 const express = require('express');
 const app = express();
-const connectDB = require('./database/db');
+const cors = require('cors');
+const morgan = require('morgan');
+const authRoutes = require('./routes/auth');
+const  conn  = require('./database/db');
 
 
-connectDB();
+//middleware 
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
+app.use('/api/auth', authRoutes);
+
+
+
+
+
+
+
 
 
 
