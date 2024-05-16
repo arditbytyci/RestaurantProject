@@ -17,7 +17,7 @@ conn.connect(function(err){
     if(err)
     throw err;
 
-    console.log('Connection successful!')
+    console.log('SQL connected')
 });
 
 

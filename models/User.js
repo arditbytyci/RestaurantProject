@@ -1,27 +1,31 @@
 
-const conn = require('../database/db');
 
 
 
-
-const user = `CREATE TABLE IF NOT EXISTS user 
-(
-  username VARCHAR(255),
-  email VARCHAR(255),
-  password VARCHAR(255),
-  role TINYINT(2),
-  date_created TIMESTAMP
-
-
-
-)`;
-conn.query(user, function (err, result) {
-  if (err) throw err;
-  console.log("Table created");
-});
- 
-
-
-module.exports = user;
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define("user", {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    role: {
+      type: DataTypes.TINYINT,
+      defaultValue: 0,
+    },
+    
+      
+    
+    
+  }, {timestamps: true});
+  return User;
+}
 
 

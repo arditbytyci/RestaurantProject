@@ -14,8 +14,8 @@ const SignUp = () => {
 
 			username: 'arditbtc',
 			email: 'arditbtc@gmail.com',
-			password: 'abc',
-			password2: 'abc',
+			password: 'abc123',
+			password2: 'abc123',
 			successMsg: false,
 			errorMsg: false,
 			loading: false
