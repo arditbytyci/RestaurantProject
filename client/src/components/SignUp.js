@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {showErrMsg, showSccsMsg} from '../components/helpers/message'
 import { showLoading } from './helpers/loading';
 import { signUp } from '../api/auth';
-import './css/SignUp.css';
+ 
 
 
 
