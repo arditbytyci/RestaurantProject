@@ -1,10 +1,25 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { showErrMsg } from "./helpers/message";
 import { showLoading } from "./helpers/loading";
 import { signIn } from "../api/auth";
 import {isEmail, isEmpty} from "validator";
+import {isAuthenticated, setAuthentication} from './helpers/authentication'
 const SignIn = () => {
+
+	let navigate = useNavigate();
+	
+
+	useEffect(() => {
+		if (isAuthenticated() && isAuthenticated().role === 1) {
+			console.log('Redirecting to adminDashboard');
+			navigate('/admin/dashboard');
+		} else if(isAuthenticated() && isAuthenticated().role === 0) {
+			console.log('Redirecting to User dashboard');
+			navigate('/');
+		}
+	}, [navigate]); 
+
 
     const [formData, setFormData] = useState({
 
@@ -13,7 +28,6 @@ const SignIn = () => {
         password: 'abc123',
         errorMsg: false,
         loading: false,
-        redirectToDashboard: false,
     });
 
     const {
@@ -21,7 +35,6 @@ const SignIn = () => {
 		password,
 		errorMsg,
 		loading,
-        redirectToDashboard,
 	} = formData;
 
 
@@ -62,7 +75,28 @@ const SignIn = () => {
                        loading: true
                    });
 
-                   signIn(data);
+                   signIn(data)
+				   .then(response => {
+
+						setAuthentication(response.data.token, response.data.User);
+						
+
+						if (isAuthenticated() && isAuthenticated().role === 1) {
+							console.log('Redirecting to adminDashboard');
+							navigate('/admin/dashboard');
+						} else  {
+							console.log('Redirecting to User dashboard');
+							navigate('/');
+						}
+
+				   }).catch(err => {
+					console.log('SignIn api function error', err);
+					setFormData({
+						...formData,
+						loading: false,
+						errorMsg: err.response.data.errorMessage 
+					});
+				   })
 
                }
            

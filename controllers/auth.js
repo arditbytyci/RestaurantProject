@@ -73,19 +73,20 @@ exports.signInController = async (req, res) => {
 
         const payload = {
             User: {
-                _id: User._id,
+                id: User.id,
             }
         };
 
 
-       await jwt.sign(payload, jwtSecret, {expiresIn: jwtExpire}, (err, token) => {
+        jwt.sign(payload, jwtSecret, {expiresIn: jwtExpire}, (err, token) => {
             if(err) console.log('jwt err' , err);
-            const {_id, username, email, role} = User;
+            const  { id, username, email, role } = User;
 
+            
 
             res.json({
                 token,
-                User: { _id, username, email, role },
+                User: { id, username, email, role },
             });
         });
 
