@@ -17,6 +17,13 @@ export const createCategory = async (formData) => {
 
     return respose;
 
+}
 
+
+export const getCategories = async () => {
+
+    const respone = await axios.get('/api/category');
+
+    return respone;
 
 }

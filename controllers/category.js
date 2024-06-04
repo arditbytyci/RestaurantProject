@@ -1,4 +1,4 @@
-const db = require('../models')
+const db = require('../models');
 
 
 
@@ -12,6 +12,15 @@ exports.create = async (req,res) => {
 
 
     try {
+
+        const categoryExist = await db.Category.findOne({where : {category}})
+
+        if(categoryExist) {
+            return res.status(400).json({
+                errorMessage: `${category} already exists.`
+            })
+        }
+
 
         let newCategory = new db.Category();
 
@@ -31,6 +40,34 @@ exports.create = async (req,res) => {
         });
         
     }
+    
+}
+
+
+
+exports.readAll = async (req,res) => {
+
+
+    try {
+
+        const categories = await db.Category.findAll();
+
+
+
+       
+
+        res.status(200).json({
+            categories
+        })
+        
+    } catch (err) {
+
+        console.log('Category readAll error ', err);
+        res.status(500).json({
+            errorMessage: 'Server error',
+        });
+        
+    }
 
 
 
@@ -39,3 +76,6 @@ exports.create = async (req,res) => {
 
     
 }
+
+
+
