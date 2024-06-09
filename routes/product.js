@@ -6,8 +6,10 @@ const productController = require('../controllers/product');
 
 
 router.post('/', jwAuth,  upload.single('productImage'), productController.create);
-
-
+router.get('/', productController.readAll);
+router.delete('/:productId', jwAuth, productController.delete);
+router.get('/:productId', productController.read);
 
 module.exports = router;
 
+ 

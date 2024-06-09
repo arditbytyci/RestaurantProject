@@ -44,6 +44,16 @@ db.Sequelize = Sequelize;
 
 
 
+db.Product.belongsTo(db.Category, {
+  foreignKey: 'id'
+});
+
+db.Category.hasMany(db.Product, {
+  foreignKey: 'productCategory'
+})
+
+
+
 
 
 module.exports = db;

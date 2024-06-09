@@ -1,19 +1,30 @@
-import React, { useState, Fragment, useEffect } from "react";
-import { createProduct } from "../api/product";
-import { getCategories } from "../api/category";
+import React, { useState, Fragment} from "react";
+
 import { isEmpty  } from "validator";
 import {showErrMsg, showSccsMsg} from './helpers/message'
 import {showLoading} from './helpers/loading';
-
-
-
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { createProduct } from "../redux/actions/productActions";
+import { clear_message } from "../redux/actions/messageActions";
 
 const AdminProductModal = () =>  {
 
-    const [categories, setCategories] = useState(null);
-    const [errorMsg, setErrorMsg] = useState('');
-    const [successMsg, setSuccessMsg] = useState('');
-    const [loading, setLoading] = useState(false);
+
+
+    //redux
+
+    
+
+    const {loading} = useSelector(state => state.loading);
+    const {successMsg, errorMsg} = useSelector(state => state.messages);
+    const {categories} = useSelector(state => state.categories);
+    const [clientSideErrorMsg, setClientSideErrorMsg] = useState('');
+
+
+    const dispatch = useDispatch();
+
+    // component state
     const [productData, setProductData] = useState({
         productImage: null,
         productName: '',
@@ -33,32 +44,17 @@ const AdminProductModal = () =>  {
     } = productData;
 
 
-    //use-effect
-    useEffect(() => {
-        loadCategories();
-    }, [loading]);
-
-    const loadCategories = async () => {
-        await getCategories()
-        .then((response) =>{
-            setCategories(response.data.categories);
-            console.log(categories);
-        })
-        .catch((err) => {
-            console.log('categories fetch error' ,err);
-        });
-    }
-
+  
 
 
     //event handlers
     const handleMessages = evt => {
-        setErrorMsg('');
-        setSuccessMsg('');
+        dispatch(clear_message());
+        setClientSideErrorMsg('');
     }
 
     const handleProductImage = evt => {
-        console.log(evt.target.files[0]);
+        
         setProductData({
             ...productData,
             [evt.target.name] : evt.target.files[0]
@@ -76,13 +72,13 @@ const AdminProductModal = () =>  {
         evt.preventDefault();
 
         if(productImage === null) { 
-            setErrorMsg('Please select an image.');
+            setClientSideErrorMsg('Please select an image.');
         } else if(isEmpty(productName) || isEmpty(productDesc) || isEmpty(productPrice)) {
-            setErrorMsg('All fields are required.');
+            setClientSideErrorMsg('All fields are required.');
         } else if(isEmpty(productCategory)) {
-            setErrorMsg('Please select a category.');
+            setClientSideErrorMsg('Please select a category.');
         } else if(isEmpty(productQty)) {
-            setErrorMsg('Please select a quantity.');
+            setClientSideErrorMsg('Please select a quantity.');
         } else {
             //success
 
@@ -96,10 +92,8 @@ const AdminProductModal = () =>  {
             formData.append('productCategory',productCategory);
             formData.append('productQty',productQty);
 
-            setLoading(true);
-            createProduct(formData)
-            .then(response => {
-                setLoading(false);
+            
+            dispatch(createProduct(formData));
                 setProductData({
                     productImage: null,
                     productName: '',
@@ -108,14 +102,7 @@ const AdminProductModal = () =>  {
                     productCategory: '',
                     productQty: '', 
                 });
-                setSuccessMsg(response.data.successMessage);
-            })
-            .catch(err => {
-                setLoading(false);
-                console.log(err);
-                setErrorMsg(err.response.data.errorMessage);
-            });
-
+        
         }
 
 
@@ -135,7 +122,7 @@ const AdminProductModal = () =>  {
                     </button>
                 </div>
                 <div className="modal-body my-2">
-
+                        {clientSideErrorMsg && showErrMsg(clientSideErrorMsg)}
                         {errorMsg && showErrMsg(errorMsg)}
                         {successMsg && showSccsMsg(successMsg)}
                         {loading ? ( <div className="text-center"> {showLoading()}</div>) : (
@@ -169,8 +156,12 @@ const AdminProductModal = () =>  {
                                         <div className="form-group col-md-4 ml-5">
                                         <label className="text-white">Category</label>
                                             <select className="custom-select mr-sm-2" name="productCategory" onChange={handleProductChange}>
-                                               {categories && categories.map((c) => (
 
+                                                <option value=''>
+													Choose one...
+												</option>
+                                               {categories && categories.map((c) => (
+                                                
                                                 <option className="text-dark"
                                                 key={c.id}
                                                 value={c.id}>

@@ -10,9 +10,14 @@ import AdminDashboard from './AdminDashboard';
 import NotFound from './NotFound';
 import AdminRoute from './AdminRoute';
 import UserRoute from './AdminRoute';
+import AdminEditProduct from './AdminEditProduct';
 
-const  App = () => (
+const  App = () => {
 
+
+    
+
+  return (
  <BrowserRouter>  
 
     <Header />
@@ -44,6 +49,15 @@ const  App = () => (
 						  	path='/user/dashboard'
 						  	element={<UserDashboard />}
 					  	/>
+              <Route
+							exact
+							path='/admin/edit/product/:productId'
+							element={<AdminEditProduct />}
+						/>
+
+
+
+
 				    	</Route>
 
               <Route Component={NotFound} />
@@ -60,8 +74,8 @@ const  App = () => (
 
 
   </BrowserRouter>
-
-);
+  );
+};
 
 
 export default App;
