@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: {
           model: 'Category',
-          key: 'id'
+          key: 'category'
         }
       },
     

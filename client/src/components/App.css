@@ -12,3 +12,16 @@
     background-position: center;
     background-size: cover;
 }
+
+.home-page {
+    height: 100vh;
+}
+
+.banner-image {
+    background-image: url('../img/banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 1.0;
+    height: 60%;
+}

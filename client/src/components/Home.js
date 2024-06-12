@@ -1,14 +1,24 @@
 import React from "react";
-
+import './App.css';
 
 
 const Home = () => {
 
 
+
+
+
+
     
 
     return (
-        <p>Inside Home component</p>
+        
+        <section className="home-page">
+            <div className="banner-image">
+
+            </div>
+        </section>
+
     );
 
     

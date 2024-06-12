@@ -1,5 +1,6 @@
 const db = require('../models');
 const fs = require('fs');
+const Category = require('../models/Category');
 
 exports.create = async (req,res) => {
 
@@ -150,7 +151,7 @@ exports.read = async (req,res) => {
 
         const product = await db.Product.findOne({where : {id : productId}});
 
-
+  
 
         res.json(product);
 
@@ -161,5 +162,58 @@ exports.read = async (req,res) => {
             errorMessage: 'Please try again',
         });
     }
+
+}
+
+
+exports.update = async (req,res) => {
+    
+
+    const productId = req.params.productId;
+     //
+     if (req.file !== undefined) {
+		req.body.fileName = req.file.filename;
+	}
+
+    
+    const Product = db.Product;
+
+   
+
+    const productCategory = await db.Product. findAll({
+
+
+            
+        include: {
+            model: db.Category,
+            foreignKey: 'productCategory' ,
+            attributes: ['category'],
+        }
+
+
+    });
+
+    const rb = req.body;
+
+    const dbId = await db.Product.findOne({where : {id: productId}});
+
+   const oldProduct = await Product.update( rb , {where : {id :productId}, include: {
+    model: db.Category,
+    foreignKey: 'productCategory' ,
+    attributes: ['category'],
+} });
+
+
+   if (req.file !== undefined && req.file.filename !== dbId.fileName) {
+    fs.unlink(`uploads/${dbId.fileName}`, err => {
+        if (err) throw err;
+        console.log('Image deleted from the filesystem');
+    });
+}
+
+
+   res.json({
+    successMessage: `${oldProduct} updated`
+   })
 
 }
