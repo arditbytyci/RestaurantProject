@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,        
       },
       productCategory: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false,
         references: {
           model: 'Category',
@@ -48,11 +48,26 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,  
        
       },
+  
       
       
+    }  ,
+       {
+      indexes: [
+        {
+          
+          unique: true,
+          fields: ['productName'],
+          name: 'text'
+         
+         
+        },
+      ],
     }, {timestamps: true});
     
     
+
+
     return product;
   }
 

@@ -2,9 +2,14 @@ import React, {Fragment} from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "./hooks/withRouter";
 import { isAuthenticated, logout } from '../components/helpers/authentication'; 
+import { useSelector } from "react-redux";
 
 
 const Header = ({ history }) => {
+
+    const {cart} = useSelector(state => state.cart);
+
+
 
 
     const handleLogout = evt => {
@@ -14,6 +19,7 @@ const Header = ({ history }) => {
       }); 
 
     };
+
 
 
     const showNavigation = () => (
@@ -30,11 +36,23 @@ const Header = ({ history }) => {
             {!isAuthenticated() && (
 
               <Fragment>
-
+                    
                     <li className="nav-item active">
                       <Link className="nav-link active" 
                               to='/Home'>
                               <i className='fas fa-home'></i>{' '}Home
+                              </Link>
+                    </li>
+                    <li className="nav-item active">
+                      <Link className="nav-link active" 
+                              to='/Shop'>
+                              <i className='fas fa-shopping-bag'></i>{' '}Shop
+                              </Link>
+                    </li>
+                    <li className="nav-item active mr-2 " style={{position: 'relative'}}>
+                      <Link className="nav-link active" 
+                              to='/cart'>
+                              <i className='fas fa-shopping-cart'></i>{' '}Cart <span  className="badge badge-danger" style={{position: 'absolute', top: '0px'}}>{cart.length}</span>
                               </Link>
                     </li>
                     <li className="nav-item">
@@ -49,6 +67,7 @@ const Header = ({ history }) => {
                                 <i className='fas fa-sign-in-alt pl-1'></i>{' '}SignIn
                                 </Link>
                     </li>
+                    
 
               </Fragment>
 
@@ -58,12 +77,13 @@ const Header = ({ history }) => {
 
               <Fragment>
 
-                    <li className="nav-item active">
+                    {/* <li className="nav-item active">
                       <Link className="nav-link active" 
                               to='/user/dashboard'>
                                 <i className='fas fa-user-cog pr-1'></i>Dashboard
                               </Link>
-                    </li>
+                    </li> */}
+              
                   
 
               </Fragment>
@@ -77,7 +97,7 @@ const Header = ({ history }) => {
                     <li className="nav-item active">
                       <Link className="nav-link active" 
                               to='/admin/dashboard'>
-                                <i className='fas fa-user-cog pr-1'></i>Dashboard
+                                <i className='fas fa-user-cog pl-1'></i>Dashboard
                               </Link>
                     </li> 
                   
@@ -96,7 +116,7 @@ const Header = ({ history }) => {
 
                         onClick={handleLogout}
                             >
-                              <i className='fas fa-sign-out-alt'></i>{' '}Logout
+                              <i className='fas fa-sign-out-alt pl-2'></i>{' '}Logout
                             </button>
                   </li>
                 

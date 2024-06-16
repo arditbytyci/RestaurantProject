@@ -1,12 +1,11 @@
+const { where } = require('sequelize');
 const db = require('../models');
 const fs = require('fs');
-const Category = require('../models/Category');
+
 
 exports.create = async (req,res) => {
 
-        console.log('req.body' , req.body);
-        console.log('req.file' , req.file);
-        console.log('req.User' , req.User);
+      
 
 
         const {filename} = req.file;
@@ -68,18 +67,8 @@ exports.readAll = async (req,res) => {
           
 
 
-        const products = await db.Product. findAll({
-
-
-            
-            include: {
-                model: db.Category,
-                foreignKey: 'productCategory' ,
-                attributes: ['id','category'],
-            }
-
-
-        })
+        const products = await db.Product. findAll({            
+        });
 
 
         
@@ -103,6 +92,34 @@ exports.readAll = async (req,res) => {
     }
 
 }
+
+
+exports.readByCount = async (req, res) => {
+	try {
+		const products = await db.Product.findAll({
+
+            include : {
+                model: db.Category,
+                attributes: ['category']
+            },
+            limit: 6
+
+        })
+			
+
+		res.json({ products });
+	} catch (err) {
+		console.log(err, 'productController.readAll error');
+		res.status(500).json({
+			errorMessage: 'Please try again later',
+		});
+	}
+};
+
+
+
+
+
 
 exports.delete = async (req,res) => {
 
@@ -217,3 +234,5 @@ exports.update = async (req,res) => {
    })
 
 }
+
+

@@ -11,8 +11,11 @@ import NotFound from './NotFound';
 import AdminRoute from './AdminRoute';
 import UserRoute from './AdminRoute';
 import AdminEditProduct from './AdminEditProduct';
+import Shop from './Shop';
+import Product from './Product';
+import Cart from './Cart';
 
-const  App = () => {
+const App = () => {
 
 
     
@@ -29,8 +32,9 @@ const  App = () => {
               <Route exact path='/Home' Component={Home} />
               <Route exact path='/SignUp' Component={SignUp} />
               <Route exact path='/SignIn' Component={SignIn} />
-              
-
+              <Route exact path='/Shop' Component={Shop} />
+              <Route exact path='/product/:productId' Component={Product} />
+              <Route exact path='/Cart' Component={Cart} />
 
 
               {/* protected admin routes */}

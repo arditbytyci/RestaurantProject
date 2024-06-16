@@ -125,3 +125,35 @@ export const getProduct =  productId => async dispatch => {
     }
 
 }
+
+
+
+export const getProductsByCount = () => async dispatch => {
+
+
+
+
+	try {
+
+
+		dispatch({ type: START_LOADING });
+		const response = await axios.get(
+			'/api/product/count'
+		);
+
+		 console.log(response);
+		dispatch({ type: STOP_LOADING });
+		dispatch({
+			type: GET_PRODUCTS,
+			payload: response.data.products,
+		});
+	} catch (err) {
+		console.log('getProductsBy Count api error: ', err);
+		dispatch({ type: STOP_LOADING });
+		dispatch({
+			type: SHOW_ERROR_MESSAGE,
+			payload: err.response.data.errorMessage,
+		});
+	}
+};
+

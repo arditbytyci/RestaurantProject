@@ -5,7 +5,7 @@ const { jwAuth } = require('../middleware/authenticator');
 
 router.post('/', jwAuth, categoryController.create);
 
-router.get('/', jwAuth, categoryController.readAll);
+router.get('/', categoryController.readAll);
 
 
 

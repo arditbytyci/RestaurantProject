@@ -17,7 +17,7 @@ const AdminBody = () => {
                 <div className='card-deck'>
                     {products && products.map(product => (
                         
-                            <Card key={product.id} product={product}/>
+                            <Card key={product.id} product={product} adminPage={true}/>
                         
                     ))}
                 </div>

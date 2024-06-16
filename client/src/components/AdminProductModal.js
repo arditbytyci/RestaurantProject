@@ -160,11 +160,11 @@ const AdminProductModal = () =>  {
                                                 <option value=''>
 													Choose one...
 												</option>
-                                               {categories && categories.map((c) => (
+                                               {categories && categories.map(c => (
                                                 
                                                 <option className="text-dark"
-                                                key={c.id}
-                                                value={c.id}>
+                                                key={c.category}
+                                                value={c.category}>
                                                     {c.category}
                                                 </option>
                                                ))

@@ -45,11 +45,11 @@ db.Sequelize = Sequelize;
 
 
 db.Product.belongsTo(db.Category, {
-  foreignKey: 'id'
+  foreignKey: 'productCategory'
 });
 
 db.Category.hasMany(db.Product, {
-  foreignKey: 'productCategory'
+  foreignKey: 'id'
 })
 
 
