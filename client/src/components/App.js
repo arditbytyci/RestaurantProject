@@ -14,6 +14,9 @@ import AdminEditProduct from './AdminEditProduct';
 import Shop from './Shop';
 import Product from './Product';
 import Cart from './Cart';
+import Shipping from './Shipping';
+import Payment from './Payment';
+import PlaceOrder from './PlaceOrder';
 
 const App = () => {
 
@@ -35,6 +38,10 @@ const App = () => {
               <Route exact path='/Shop' Component={Shop} />
               <Route exact path='/product/:productId' Component={Product} />
               <Route exact path='/Cart' Component={Cart} />
+              <Route exact path='/Shipping' Component={Shipping} />
+              <Route exact path='/Payment' Component={Payment} />
+              <Route exact path='/PlaceOrder' Component={PlaceOrder} />
+              
 
 
               {/* protected admin routes */}

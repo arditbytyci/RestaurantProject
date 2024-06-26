@@ -1,5 +1,5 @@
 
-import {ADD_TO_CART, DELETE_FROM_CART} from '../constants/cartConstants';
+import {ADD_TO_CART, DELETE_FROM_CART, CLEAR_CART} from '../constants/cartConstants';
 
 
 export const addToCart = (product) => async dispatch => {
@@ -49,3 +49,9 @@ export const deleteFromCart = (product) => async dispatch => {
 
 
 }
+
+export const clearCart = () => async dispatch => {
+	dispatch({
+		type: CLEAR_CART,
+	});
+};

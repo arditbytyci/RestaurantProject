@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { ADD_TO_CART } from "../redux/constants/cartConstants";
 import { deleteFromCart } from "../redux/actions/cartActions";
+import {isAuthenticated} from './helpers/authentication';
 
 const Cart = () => {
 
@@ -32,6 +33,13 @@ const Cart = () => {
         
     }
 
+    const handleCheckOut = (evt) => {
+        if(isAuthenticated()) {
+            navigate('/shipping');
+        } else {
+            navigate('/SignIn?redirect=shipping');
+        }
+    }
     
 
     return(
@@ -82,7 +90,7 @@ const Cart = () => {
                     <h2>Cart Summary</h2>
                     <p className="font-weight-light text-muted border-bottom">{cart.length === 1 ? '(1) Item' : `(${cart.length}) Items`}</p>
                     <p className="font-weight-bold">Total : {cart.reduce((currentSum, currentCartItem) => currentSum + currentCartItem.count * currentCartItem.productPrice, 0).toFixed(2)} EUR</p>
-                    <button className="btn btn-dark btn-large btn-block mb-5 py-2"> Proceed to checkout</button>
+                    <button className="btn btn-dark btn-large btn-block mb-5 py-2" onClick={handleCheckOut}> Proceed to checkout</button>
                 </div>
             </div>
             </Fragment>

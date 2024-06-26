@@ -55,6 +55,8 @@ const Header = ({ history }) => {
                               <i className='fas fa-shopping-cart'></i>{' '}Cart <span  className="badge badge-danger" style={{position: 'absolute', top: '0px'}}>{cart.length}</span>
                               </Link>
                     </li>
+                 
+                    
                     <li className="nav-item">
                       <Link class="nav-link active" aria-current="page" 
                               to='/SignUp'>
@@ -84,7 +86,24 @@ const Header = ({ history }) => {
                               </Link>
                     </li> */}
               
-                  
+              <li className="nav-item active">
+                      <Link className="nav-link active" 
+                              to='/Home'>
+                              <i className='fas fa-home'></i>{' '}Home
+                              </Link>
+                    </li>
+                    <li className="nav-item active">
+                      <Link className="nav-link active" 
+                              to='/Shop'>
+                              <i className='fas fa-shopping-bag'></i>{' '}Shop
+                              </Link>
+                    </li>
+                    <li className="nav-item active mr-2 " style={{position: 'relative'}}>
+                      <Link className="nav-link active" 
+                              to='/cart'>
+                              <i className='fas fa-shopping-cart'></i>{' '}Cart <span  className="badge badge-danger" style={{position: 'absolute', top: '0px'}}>{cart.length}</span>
+                              </Link>
+                    </li>
 
               </Fragment>
 

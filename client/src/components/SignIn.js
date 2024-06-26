@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { showErrMsg } from "./helpers/message";
 import { showLoading } from "./helpers/loading";
 import { signIn } from "../api/auth";
@@ -8,6 +8,7 @@ import {isAuthenticated, setAuthentication} from './helpers/authentication'
 const SignIn = () => {
 
 	let navigate = useNavigate();
+	let location = useLocation();
 	
 
 	useEffect(() => {
@@ -79,14 +80,17 @@ const SignIn = () => {
 				   .then(response => {
 
 						setAuthentication(response.data.token, response.data.User);
-						
+						const redirect = location.search.split('=')[1];
 
 						if (isAuthenticated() && isAuthenticated().role === 1) {
 							console.log('Redirecting to adminDashboard');
 							navigate('/admin/dashboard');
-						} else  {
+						} else if(isAuthenticated() && isAuthenticated().role === 0 && !redirect ) {
 							console.log('Redirecting to User dashboard');
 							navigate('/');
+						} else {
+							console.log('Redirectiong to Shipping');
+							navigate('/Shipping');
 						}
 
 				   }).catch(err => {

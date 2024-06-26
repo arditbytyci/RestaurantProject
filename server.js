@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
 const filterRoutes = require('./routes/filter');
+const paymentRoutes = require('./routes/payment');
 const bodyParser = require('body-parser');
 
 //middleware 
@@ -26,6 +27,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/product', productRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use('/api/filter', filterRoutes);
+app.use('/api/payment', paymentRoutes);
 
 
 db.sequelize.sync().then(() => {

@@ -12,5 +12,12 @@ export const deleteLocalStorage = key => {
     localStorage.removeItem(key);
 }
 
+export const clearCartLocalStorage = next => {
+	deleteLocalStorage('cart');
+	deleteLocalStorage('shippingAddress');
+	deleteLocalStorage('paymentMethod');
+
+	next();
+};
 
  
