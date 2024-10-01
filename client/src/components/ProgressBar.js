@@ -9,7 +9,7 @@ const ProgressBar = ({step1,step2,step3}) => {
 
     return (
         <Fragment>
-            <nav aria-label="breadcrumb">
+            <nav className="bg-dark" aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     {step1 ? (<li className="breadcrumb-item active" aria-current='page'><Link to='/Shipping'>Shipping</Link></li>) :
                      (<li className="breadcrumb-item"  aria-current='page'>

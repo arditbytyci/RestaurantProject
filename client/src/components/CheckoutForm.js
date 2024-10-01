@@ -49,7 +49,7 @@ const CheckoutForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className="bg-black">
 			<PaymentElement />
 			<button
 				className='btn btn-primary mt-3'

@@ -1,15 +1,25 @@
-import React, { Fragment }  from 'react';
- import { Link } from 'react-router-dom';
+import React, { Fragment, useEffect, useState }  from 'react';
+ import { Link, useNavigate } from 'react-router-dom';
 //redux
 import { useDispatch } from 'react-redux';
-import { deleteProduct } from '../redux/actions/productActions';
+import { deleteProduct, getProducts } from '../redux/actions/productActions';
 import { addToCart } from '../redux/actions/cartActions';
 
 const Card = ({product, adminPage = false, homePage = false}) => {
 
 
-    const dispatch = useDispatch();
+    let navigate = useNavigate();
 
+    const dispatch = useDispatch();
+    
+
+    const handleDelete =  () => {
+        
+        dispatch(deleteProduct(product.id))
+        navigate(0)
+        
+    }
+    
     
 
     const handleAddToCart = () => {
@@ -19,7 +29,7 @@ const Card = ({product, adminPage = false, homePage = false}) => {
     return (
 
 
-        <div className='col-md-4 my-3'>
+        <div id="card" className='col-md-4 my-3'>
 
             <div className='card h-100'>
                 <a href='#!'>
@@ -49,9 +59,8 @@ const Card = ({product, adminPage = false, homePage = false}) => {
                                     <i className='far fa-edit pr-1'></i>
                                 
                                 </Link>
-                                <button type='button' className='btn btn-danger btn-sm' onClick={() =>
-                                                dispatch(deleteProduct(product.id))
-                                            }>
+                                <button type='button' className='btn btn-danger btn-sm' onClick={handleDelete}
+                                            >
                                     <i className='far fa-trash-alt pr-1'></i>
                                     
                                 </button>
@@ -61,12 +70,12 @@ const Card = ({product, adminPage = false, homePage = false}) => {
 
                 {homePage && (
                                 <Fragment>
-                                        <Link   to={`/product/${product.id}`} type='button' className='btn btn-primary btn-sm mr-1 my-1'>
+                                        <Link   to={`/product/${product.id}`} type='button' className='btn btn-outline-light text-black  btn-sm mr-1 my-1'>
 
                                         View product
 
                                 </Link>
-                                <button type='button' className='btn btn-warning btn-sm' disabled={product.productQty <= 0} onClick={handleAddToCart}>
+                                <button type='button' className='btn btn-outline-warning btn-sm' disabled={product.productQty <= 0} onClick={handleAddToCart}>
                                     
                                     Add to Cart
                                 </button>

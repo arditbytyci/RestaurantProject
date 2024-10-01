@@ -75,31 +75,13 @@ const Shop = () => {
             </div>
             <div className="row">
                 <div className="col-md-3 border-right">
-                    <div className="text-muted mb-2">
+                    <div className="text-white mb-2">
                         Filters <span className="fas fa-sliders-h"></span>
                     </div>
 
-                    <nav className='navbar navbar-expand-lg navbar-light bg-light border-top p-3'>
-						<form className='form-inline my-2 my-lg-0'>
-							<input
-								className='form-control mr-sm-2'
-								type='search'
-								placeholder='Search'
-								aria-label='Search'
-								name='search'
-                               
-							/>
-							<button
-								className='btn btn-outline-success my-2 my-sm-0'
-								type='submit'
-								disabled={true}
-							>
-								Search
-							</button>
-						</form>
-					</nav>
+                    
 
-                    <div className='border-top border-bottom bg-light p-3'>
+                    <div className='border-top border-bottom bg-black text-white p-3'>
 						{categories &&
 							categories.map(c => (
 								<div key={c.category} className='form-check'>

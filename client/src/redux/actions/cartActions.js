@@ -6,7 +6,7 @@ export const addToCart = (product) => async dispatch => {
 
     const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
 
-    const duplicates = cart.filter(cartItem => cartItem._id === product.id);
+    const duplicates = cart.filter(cartItem => cartItem.id === product.id);
 
     if(duplicates.length === 0) {
 

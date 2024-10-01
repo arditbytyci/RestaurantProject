@@ -67,7 +67,7 @@ exports.readAll = async (req,res) => {
           
 
 
-        const products = await db.Product. findAll({            
+        const products = await db.Product.findAll({            
         });
 
 
@@ -130,21 +130,21 @@ exports.delete = async (req,res) => {
         const productId = req.params.productId;
         
         const dbId = await db.Product.findOne({where : {id: productId}});
-        const deletedProduct = await db.Product.destroy({where : {id : productId}});
+        const deletedProduct = await db.Product.destroy({where: {id: productId}});
         
        
         fs.unlink(`uploads/${dbId.fileName}`, err => {
 			if (err) throw err;
-			console.log(
+            console.log(
 				'Image successfully deleted from filesystem: ',
 				dbId.fileName
 			);
 		});
 
         
-
+        console.log("deleted" + productId)  
         res.status(200).json(deletedProduct);
-
+        
 
         
     } catch (err) {
@@ -197,7 +197,7 @@ exports.update = async (req,res) => {
 
    
 
-    const productCategory = await db.Product. findAll({
+    const productCategory = await db.Product.findAll({
 
 
             

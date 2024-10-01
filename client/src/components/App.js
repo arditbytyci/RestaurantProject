@@ -5,7 +5,7 @@ import Header from './Header';
 import Home from './Home';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import UserDashboard from './UserDashboard';
+
 import AdminDashboard from './AdminDashboard';
 import NotFound from './NotFound';
 import AdminRoute from './AdminRoute';
@@ -24,7 +24,7 @@ const App = () => {
     
 
   return (
- <BrowserRouter>  
+ <BrowserRouter >   
 
     <Header />
 
@@ -32,7 +32,7 @@ const App = () => {
 
           <Routes>
 
-              <Route exact path='/Home' Component={Home} />
+              <Route exact path='/Home'  Component={Home} />
               <Route exact path='/SignUp' Component={SignUp} />
               <Route exact path='/SignIn' Component={SignIn} />
               <Route exact path='/Shop' Component={Shop} />
@@ -55,11 +55,7 @@ const App = () => {
 
               {/* protected user routes */}
               <Route element={<UserRoute />}>
-					  	<Route
-						  	exact
-						  	path='/user/dashboard'
-						  	element={<UserDashboard />}
-					  	/>
+					 
               <Route
 							exact
 							path='/admin/edit/product/:productId'

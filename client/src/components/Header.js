@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "./hooks/withRouter";
 import { isAuthenticated, logout } from '../components/helpers/authentication'; 
 import { useSelector } from "react-redux";
-
+import logo from './logo.png'
 
 const Header = ({ history }) => {
 
@@ -24,8 +24,8 @@ const Header = ({ history }) => {
 
     const showNavigation = () => (
         
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link className="navbar-brand" to=''>Logo</Link>
+      <nav id="navbar" className="navbar navbar-expand-lg navbar-dark bg-black">
+      <Link className="navbar-brand" to='/Home'><img src={logo} className="logo" alt="logo"></img></Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -116,7 +116,7 @@ const Header = ({ history }) => {
                     <li className="nav-item active">
                       <Link className="nav-link active" 
                               to='/admin/dashboard'>
-                                <i className='fas fa-user-cog pl-1'></i>Dashboard
+                                <i className='fas fa-user-cog pl-1 mr-1'></i>Dashboard
                               </Link>
                     </li> 
                   

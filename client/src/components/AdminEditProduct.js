@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment} from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios  from "axios";
-import AdminHeader from './AdminHeader';
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../redux/actions/productActions";
@@ -94,22 +93,22 @@ const AdminEditProduct = () => {
     return (
         <Fragment>
         
-        <div className='container my-3'>
-            <div className='row'>
-                <div className='col-md-8 mx-auto'>
+        <div className='container my-3 bg-black'>
+            <div className='row bg-black'>
+                <div className='col-md-8 mx-auto bg-black'>
                     <Link to='/admin/dashboard'>
                         <span className='fas fa-arrow-left text-dark'></span>
                     </Link>
                     <div>
                         <br />
-                        <div className='modal-content'>
+                        <div className='modal-content bg-black'>
                             <form onSubmit={handleProductSubmit}>
-                                <div className='modal-header bg-warning text-white'>
+                                <div className='modal-header bg-dark text-white'>
                                     <h5 className='modal-title'>
                                         Update Food
                                     </h5>
                                 </div>
-                                <div className='modal-body my-2'>
+                                <div className='modal-body my-2 bg-black'>
                                     <Fragment>
                                         <label className='btn btn-dark mr-4'>
                                             Choose file

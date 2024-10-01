@@ -25,8 +25,8 @@ const SignIn = () => {
     const [formData, setFormData] = useState({
 
        
-        email: 'arditbtc@gmail.com',
-        password: 'abc123',
+        email: '',
+        password: '',
         errorMsg: false,
         loading: false,
     });
@@ -83,13 +83,13 @@ const SignIn = () => {
 						const redirect = location.search.split('=')[1];
 
 						if (isAuthenticated() && isAuthenticated().role === 1) {
-							console.log('Redirecting to adminDashboard');
+							
 							navigate('/admin/dashboard');
 						} else if(isAuthenticated() && isAuthenticated().role === 0 && !redirect ) {
-							console.log('Redirecting to User dashboard');
-							navigate('/');
+							
+							navigate('/Home');
 						} else {
-							console.log('Redirectiong to Shipping');
+							
 							navigate('/Shipping');
 						}
 
@@ -151,7 +151,7 @@ const SignIn = () => {
 				</button>
 			</div>
 			{/* already have account */}
-			<p className='text-center text-black'>
+			<p className='text-center text-dark'>
 				Dont have an account? <Link to='/signup'>Register now!</Link>
 			</p>
 		</form>

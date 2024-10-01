@@ -1,3 +1,44 @@
+html,body {
+    font-family: "Montserrat", sans-serif;
+    background-color: black;
+    color: white;
+}
+
+.display-4 {
+    background-color: black;
+}
+.jumbotron {
+    background-color: black;
+    color: white;
+}
+
+.table {
+    background-color: black;
+    color: white;
+}
+
+.border-0 {
+    background-color: black;
+   color: white;
+}
+
+.card-body {
+    background-color: black;
+   color: white;
+   
+
+}
+
+.breadcrumb {
+    background-color: black;
+    color: white;
+}
+
+.card {
+    background-color: black;
+    border-radius: 20px;
+}
+
 .signup-container {
     background-image: url('../img/signupbg.jpg');
     background-repeat: no-repeat;
@@ -11,6 +52,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    
 }
 
 .home-page {
@@ -18,10 +60,17 @@
 }
 
 .banner-image {
-    background-image: url('../img/banner.jpg');
+    background-image: url('../img/header6.jpg');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position:calc(100% - 0%) calc(100% - 42%);
     background-size: cover;
     opacity: 1.0;
     height: 60%;
+    
+    
+}
+
+.logo {
+    
+    width: 70px ;
 }

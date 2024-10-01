@@ -39,14 +39,14 @@ const Payment = () => {
 
 
     return(
-        <section className="m-4">
+        <section className="m-4 bg-black">
              <div className="jumbotron p-1">
                 <h5>
                     <ProgressBar step1 step2/>
                 </h5>
              </div>
 
-            <div className="container border py-4">
+            <div className="container border py-4 bg-d">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <h6 className="font-weight-bold mb-4">

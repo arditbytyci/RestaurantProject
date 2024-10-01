@@ -48,14 +48,14 @@ const Cart = () => {
             {cart.length <= 0 ? (
                 <div className="jumbotron">
                 <h1 className="display-4">Your cart is empty</h1>
-                <button className="btn btn-dark text-white mt-4" onClick={handleGoBackBtn}>
+                <button className="btn btn-outline-light text-black mt-4" onClick={handleGoBackBtn}>
                     Shop!    
                 </button>
             </div>
-            ) : (
+            ) : ( 
                 <Fragment>
-                <div className="jumbotron">
-                <h1 className="display-4">Cart</h1>
+                <div className="jumbotron bg-black">
+                <h1 className="display-4 text-white">Cart</h1>
             </div>
             <div className="row">
               <div className="col-md-8">
@@ -73,8 +73,8 @@ const Cart = () => {
 
                                     {cart.map(product => (
                                         <tr key={product.id}>
-                                            <th scope="row"> <img className='img-fluid w-100 img-thumbnail' style={{maxWidth: '110px'}} src={`/uploads/${product.fileName}`} alt='product'  /></th>
-                                            <td className="mt-3"><Link to={`/product/${product.id}`} className="text-center text-dark">{product.productName}</Link></td>
+                                            <th scope="row" > <img className='img-fluid w-100 img-thumbnail' style={{maxWidth: '90px',background: 'black'}} src={`/uploads/${product.fileName}`} alt='product'  /></th>
+                                            <td className="mt-3"><Link to={`/product/${product.id}`} className="text-center text-white">{product.productName}</Link></td>
                                             <td>{product.productPrice.toLocaleString('en-US', {style: 'currency',currency: 'EUR',})}</td>
                                             <td><input type="number" className="border-0" min='1' max={product.productQty}  value={product.count} onChange={e => handleQtyChange(e, product)}/></td>
                                             <td><button type='button' className='btn btn-danger btn-sm' onClick={() => dispatch(deleteFromCart(product))}><i className='far fa-trash-alt pr-1'></i></button></td>
@@ -86,7 +86,7 @@ const Cart = () => {
 							</table>
 
                 </div>
-                <div className="col-md-4 border-left pl-4">
+                <div className="col-md-4 border-left pl-4 bg-black text-white">
                     <h2>Cart Summary</h2>
                     <p className="font-weight-light text-muted border-bottom">{cart.length === 1 ? '(1) Item' : `(${cart.length}) Items`}</p>
                     <p className="font-weight-bold">Total : {cart.reduce((currentSum, currentCartItem) => currentSum + currentCartItem.count * currentCartItem.productPrice, 0).toFixed(2)} EUR</p>

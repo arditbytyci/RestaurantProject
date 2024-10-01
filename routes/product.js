@@ -9,9 +9,10 @@ const productController = require('../controllers/product');
 router.post('/', jwAuth,  upload.single('productImage'), productController.create);
 router.get('/count', productController.readByCount);
 router.get('/', productController.readAll);
+router.delete('/:productId', jwAuth, productController.delete);
 router.get('/:productId', productController.read);
 
-router.delete('/:productId', jwAuth, productController.delete);
+
 
 router.put('/:productId', jwAuth, upload.single('productImage'),productController.update);
 

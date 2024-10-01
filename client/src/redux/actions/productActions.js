@@ -1,7 +1,7 @@
 import axios from "axios";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import { SHOW_SUCCESS_MESSAGE, SHOW_ERROR_MESSAGE } from "../constants/messageConstants";
-import { CREATE_PRODUCT, DELETE_PRODUCT, GET_PRODUCTS, GET_PRODUCT } from "../constants/productConstants";
+import { CREATE_PRODUCT,GET_PRODUCTS, GET_PRODUCT, DELETE_PRODUCT } from "../constants/productConstants";
 
 
 
@@ -50,7 +50,7 @@ export const getProducts =  () => async dispatch => {
         dispatch({ type: START_LOADING });
 		const response = await axios.get(
 			'/api/product'
-		);
+		)
 		dispatch({ type: STOP_LOADING });
 		dispatch({
 			type: GET_PRODUCTS,
@@ -72,31 +72,34 @@ export const getProducts =  () => async dispatch => {
 
 
 
-export const deleteProduct =  productId => async dispatch => {
+
+export const deleteProduct =  (productId) => async dispatch => {
 
     try {
-		dispatch({ type: START_LOADING });
+
+        dispatch({ type: START_LOADING });
 		const response = await axios.delete(
 			`/api/product/${productId}`
-		);
+		)
 		dispatch({ type: STOP_LOADING });
 		dispatch({
 			type: DELETE_PRODUCT,
 			payload: response.data,
 		});
 
-        console.log('deleted product' +  JSON.stringify(response));
+		 
+        
 
-	} catch (err) {
-		console.log('deleteProduct api error: ', err);
-		dispatch({ type: STOP_LOADING });
-		dispatch({
-			type: SHOW_ERROR_MESSAGE,
-			payload: err.response.data.errorMessage,
-		});
-	}
+    } catch(err) {
+        console.log('deleteProduct api error', err);
+         dispatch({type:STOP_LOADING});
+        dispatch({type:SHOW_ERROR_MESSAGE, payload: err.response.data.errorMessage})
+
+
+    }
 
 }
+
  
 
 
@@ -114,7 +117,8 @@ export const getProduct =  productId => async dispatch => {
 			payload: response.data,
 		});
 
-        
+	
+		
 
     } catch(err) {
         console.log('getProduct api error', err);
@@ -141,7 +145,7 @@ export const getProductsByCount = () => async dispatch => {
 			'/api/product/count'
 		);
 
-		 console.log(response);
+		
 		dispatch({ type: STOP_LOADING });
 		dispatch({
 			type: GET_PRODUCTS,
